@@ -14,5 +14,9 @@
     "supabase"
   ],
   "author": "Alicia Moses, Adam Parr",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node": "^20.1.0"
+  }
 }
