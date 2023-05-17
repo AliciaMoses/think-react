@@ -1,0 +1,17 @@
+
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "types": ["@jest/globals", "node", "jest"],
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+
+  },
+  "include": ["*/*","app.ts", "index.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+
+}
