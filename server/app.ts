@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import cors from "cors";
 import { createDbClient } from "./utils/db.connection";
+import { userRouter } from "./routers/users/users"
 
 const createApp = (): Express => {
   const app = express();
@@ -10,7 +11,7 @@ const createApp = (): Express => {
 
   const supabase = createDbClient();
 
-
+  app.use("/users", userRouter);
 
   return app;
 };
