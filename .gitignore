@@ -1,5 +1,8 @@
 .env
 client/node_modules/
+client/cypress/
+
+
 server/.env
 server/node_modules/
 server/dist
