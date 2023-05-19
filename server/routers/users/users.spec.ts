@@ -59,7 +59,7 @@ describe("User Router", () => {
   it("should create a new user successfully", async () => {
     const newUser = { username: "TestUser", email: "testuser@email.com" };
 
-    const res = await request(app).post("/users").send(newUser);
+    const res = await request(app).post("/new").send(newUser);
 
     expect(res.status).toBe(200);
 
@@ -70,14 +70,39 @@ describe("User Router", () => {
     expect(createdUser.username).toEqual(newUser.username);
     expect(createdUser.email).toEqual(newUser.email);
   }, 10000);
+
   it("finds a user by id", async () => {
     const user = { username: "test1", email: "test1@email.com" };
     const createdUser = await userController.create(user);
     expect(createdUser).not.toBeNull();
 
-    const res = await request(app).get(`/users/${createdUser![0].id}`);
+    const res = await request(app).get(`/id/${createdUser![0].id}`);
 
     expect(res.status).toBe(200);
     expect(res.body.username).toEqual(user.username);
+  });
+
+  it("finds a user by username", async () => {
+    const user = { username: "test2", email: "test2@email.com" };
+    const createdUser = await userController.create(user);
+    expect(createdUser).not.toBeNull();
+
+    const res = await request(app).get(`/username/${createdUser![0].username}`);
+
+    expect(res.status).toBe(200);
+    expect(res.body.username).toEqual(user.username);
+    expect(res.body.email).toEqual(user.email);
+  });
+
+  it("finds a user by email", async () => {
+    const user = { username: "test3", email: "test3@email.com" };
+    const createdUser = await userController.create(user);
+    expect(createdUser).not.toBeNull();
+
+    const res = await request(app).get(`/email/${createdUser![0].email}`);
+
+    expect(res.status).toBe(200);
+    expect(res.body.username).toEqual(user.username);
+    expect(res.body.email).toEqual(user.email);
   });
 });
