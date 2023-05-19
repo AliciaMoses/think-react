@@ -1,24 +1,24 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { User } from "../../models/user/user";
 
-type NewUser = Omit<User, "id">;
+type NewUser = Omit<User, "id" | "created_at">;
 
 const UserController = (supabase: SupabaseClient) => {
-  const create = async (user: NewUser): Promise<User | null> => {
-    const { data, error } = await supabase.from("users").insert(user).single();
+  const create = async (user: NewUser): Promise<User[] | null> => {
+    const { data, error } = await supabase.from("users").insert(user).select();
 
     if (error) {
       console.error("Error creating user:", error);
       return null;
     }
 
-    return data as User;
+    return data as User[];
   };
 
   const findById = async (id: string): Promise<User | null> => {
     const { data, error } = await supabase
       .from("users")
-      .select("*")
+      .select()
       .eq("id", id)
       .single();
 
@@ -27,7 +27,7 @@ const UserController = (supabase: SupabaseClient) => {
       return null;
     }
 
-    return data as User;
+    return data as unknown as User;
   };
 
   const findByUsername = async (username: string): Promise<User | null> => {
