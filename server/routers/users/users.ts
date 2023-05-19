@@ -12,5 +12,16 @@ export const userRouter = (supabase: SupabaseClient) => {
     res.json(createdUser);
   });
 
+  router.get("/users/:id", async (req, res) => {
+    const userId = req.params.id;
+    console.log(req.params);
+    const user = await userController.findById(userId);
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).send({ error: "User not found" });
+    }
+  });
+
   return router;
 };
