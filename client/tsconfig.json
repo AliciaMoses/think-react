@@ -5,8 +5,9 @@
       "jsx": "react",
       "strict": true,
       "esModuleInterop": true,
-      "outDir": "dist"
+      "outDir": "dist",
+      "types": ["cypress"]
     },
-    "include": ["src", "public"]
+    "include": ["src", "public", "cypress.d.ts"]
   }
   
