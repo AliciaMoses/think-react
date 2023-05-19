@@ -1,7 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { User } from "../../models/user/user";
 
-type NewUser = Omit<User, "id">;
+type NewUser = Omit<User, "id" | "created_at">;
 
 const UserController = (supabase: SupabaseClient) => {
   const create = async (user: NewUser): Promise<User | null> => {
@@ -12,7 +12,7 @@ const UserController = (supabase: SupabaseClient) => {
       return null;
     }
 
-    return data as User;
+    return data as unknown as User;
   };
 
   const findById = async (id: string): Promise<User | null> => {
