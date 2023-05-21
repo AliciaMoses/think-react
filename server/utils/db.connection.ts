@@ -16,18 +16,5 @@ export const createDbClient = (): SupabaseClient => {
 
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-  supabase
-    .from("test")
-    .select()
-    .limit(1)
-    .then(({ data, error }) => {
-      if (error) {
-        console.error("Failed to connect to the Supabase database:", error);
-      } else {
-        console.log("Connected to the Supabase database successfully");
-      }
-      console.log(data);
-    });
-
   return supabase;
 };
