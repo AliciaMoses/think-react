@@ -45,5 +45,12 @@ export const userRouter = (supabase: SupabaseClient) => {
     }
   });
 
+  router.get("/", async (req, res) => {
+    const users = await userController.findAll();
+    res.json(users);
+  });
+
+
+
   return router;
 };
