@@ -105,4 +105,22 @@ describe("User Router", () => {
     expect(res.body.username).toEqual(user.username);
     expect(res.body.email).toEqual(user.email);
   });
+  it("finds all users", async () => {
+    const user1 = { username: "test4", email: "test4@email.com" };
+    const user2 = { username: "test5", email: "test5@email.com" };
+    const createdUser1 = await userController.create(user1);
+    const createdUser2 = await userController.create(user2);
+
+    const res = await request(app).get("/");
+
+    expect(res.status).toBe(200);
+
+    const users = res.body;
+    expect(users.some((user: any) => user.id === createdUser1![0].id)).toBe(
+      true
+    );
+    expect(users.some((user: any) => user.id === createdUser2![0].id)).toBe(
+      true
+    );
+  });
 });
